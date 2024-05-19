@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, forwardRef } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import Button from '@mui/material/Button'
 import Chip from '@mui/material/Chip'
 import Dialog from '@mui/material/Dialog'
@@ -8,6 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle'
 import PaperComponent from './draggablecomponent'
 import { animated, useSpring } from '@react-spring/web'
 import Pointer from './pointer'
+
 export default function Walkabout(props) {
   const {
     btnLabel = 'Demo',
@@ -279,7 +280,8 @@ export default function Walkabout(props) {
           style={{
             position: 'absolute',
             left: demo.x + demo.width / 2,
-            top: demo.y
+            top: demo.y,
+            zIndex: 2
           }}
         >
           <Pointer
@@ -293,10 +295,20 @@ export default function Walkabout(props) {
       <SetBtnType />
       {links && (
         <Dialog
-          sx={{
-            position: 'relative',
-            left: demo && demo.x * (demo.width / document.width),
-            top: demo && demo.y * (demo.height / document.height)
+          style={{
+            position: 'absolute',
+            left: demo && demo.x,
+            top: demo && demo.y + demo.height,
+            margin: 0,
+            padding: 0,
+            height: 'auto',
+            maxHeight: 'fit-content',
+            width: 'auto',
+            maxWidth: 'fit-content',
+            overflow: 'scroll',
+            zIndex: 12,
+            display: 'flex',
+            flexShrink: true
           }}
           open={open}
           onClose={() => setOpen(false)}
@@ -338,7 +350,7 @@ export default function Walkabout(props) {
               {label && label !== '' && <LabelContainer label={label} />}
             </DialogTitle>
             <DialogContent style={{ padding: 5, margin: 'auto' }}>
-              {link <= links.length - 1 && (
+              {link <= links.length - 1 && links[link].images[frame] && (
                 <img
                   alt='shots'
                   src={'../walkabout-images/' + links[link].images[frame]}

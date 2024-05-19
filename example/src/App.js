@@ -12,13 +12,42 @@ const App = () => {
     closingId: 'insights'}
   ]
   return (
-    <div >
+    <div style={{display:'flex', flexDirection:'column'}}>
       <Walkabout links = {links} />
+      <div style={{display:'flex', flexDirection:'row'}}>
       <Button id='insights' >INSIGHTS </Button>
       <Button id='insightfilters'> Select </Button>
       <Button id='test'> Test </Button>
-      <Button id='test1'> <AddIcon  />Test1 </Button>
+      <Button >INSIGHTS </Button>
+      <Button >INSIGHTS </Button>
 
+      <Button id='test1'> <AddIcon  />Test1 </Button>
+      </div>
+      <Button >INSIGHTS </Button>
+      <Button > Select </Button>
+      <Button > Test </Button>
+      <Button > <AddIcon  />Test1 </Button>
+      <Button  >INSIGHTS </Button>
+      <Button > Select </Button>
+      <Button > Test </Button>
+      <Button > <AddIcon  />Test1 </Button>
+      <Button  >INSIGHTS </Button>
+      <Button > Select </Button>
+      <Button > Test </Button>
+      <Button > <AddIcon  />Test1 </Button>
+      <Button >INSIGHTS </Button>
+      <Button > Select </Button>
+      <Button > Test </Button>
+      <Button > <AddIcon  />Test1 </Button>
+      <Button  >INSIGHTS </Button>
+      <Button > Select </Button>
+      <Button > Test </Button>
+      <Button > <AddIcon  />Test1 </Button>
+      <Button>INSIGHTS </Button>
+      <Button > Select </Button>
+      <Button > Test </Button>
+      <Button > <AddIcon  />Test1 </Button>
+      
     </div>
   )
 }

@@ -8,7 +8,7 @@ export default function PaperComponent(props) {
       handle='#draggable-dialog-title'
       cancel={'[class*="MuiDialogContent-root"]'}
     >
-      <Paper {...props} elevation={0} />
+      <Paper {...props} elevation={2} />
     </Draggable>
   )
 }
