@@ -7,20 +7,18 @@
 ## Install
 
 ```bash
-npm install --save react-walkabout
+npm install --save react-demo-tour
 ```
 
 ## Usage
 
 ```jsx
 import React, { Component } from 'react'
-
-import MyComponent from 'react-walkabout'
-import 'react-walkabout/dist/index.css'
+import Walkabout from  'react-demo-tour'
 
 class Example extends Component {
   render() {
-    return <MyComponent />
+    return <Walkabout links =[{texts:[],labels:[], pointers:[], images:{}]/>
   }
 }
 ```
