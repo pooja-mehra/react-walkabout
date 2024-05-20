@@ -8,16 +8,21 @@ import DialogTitle from '@mui/material/DialogTitle'
 import PaperComponent from './draggablecomponent'
 import { animated, useSpring } from '@react-spring/web'
 import Pointer from './pointer'
+import PreviewIcon from '@mui/icons-material/Preview'
+import Fab from '@mui/material/Fab'
 
 export default function Walkabout(props) {
   const {
-    btnLabel = 'Demo',
-    btnBgcolor,
-    btnColor = '#3f51b5',
-    variant = 'filled',
-    btnStyle,
+    isFixed = false,
+    btnLabel = <PreviewIcon />,
+    btnBgcolor = '#3f51b5',
+    btnColor = 'white',
+    variant = 'text',
+    btnStyle = 'fab',
+    btnSize = 'small',
     links,
-    titleStyle,
+    titleColor = '#9c27b0',
+    animateType = 'grow',
     labelContainerStyle,
     pointer
   } = props
@@ -87,7 +92,7 @@ export default function Walkabout(props) {
     }
   }
 
-  const setTextAnime = (animateType) => {
+  const setAnime = (animateType) => {
     switch (animateType) {
       case 'fadeIn':
         return {
@@ -118,7 +123,7 @@ export default function Walkabout(props) {
             { opacity: 0.5 },
             { opacity: 0 },
             { opacity: 0.5 },
-            { opacity: 0.8 }
+            { opacity: 1 }
           ],
           delay: 200
         }
@@ -140,11 +145,7 @@ export default function Walkabout(props) {
     }
   }
 
-  const textAnime = useSpring(
-    setTextAnime(
-      titleStyle && titleStyle.animateType ? titleStyle.animateType : 'default'
-    )
-  )
+  const anime = useSpring(setAnime(animateType))
 
   const LabelContainer = (props) => {
     return (
@@ -181,6 +182,7 @@ export default function Walkabout(props) {
           ? sizes[labelContainerStyle.size]
           : sizes.medium,
       color: '#3f51b5',
+      backgroundColor: 'white',
       border: 'solid',
       borderColor: 'lightGrey',
       margin: 'auto',
@@ -251,9 +253,10 @@ export default function Walkabout(props) {
 
   const SetBtnType = () => {
     switch (btnStyle) {
-      case 'Chip':
+      case 'button':
         return (
           <Button
+            size={btnSize}
             variant={variant}
             style={{ backgroundColor: btnBgcolor, color: btnColor }}
             onClick={demoStart}
@@ -261,14 +264,32 @@ export default function Walkabout(props) {
             {btnLabel}
           </Button>
         )
-      default:
+      case 'chip':
         return (
           <Chip
+            size={btnSize}
             variant={variant}
-            style={{ backgroundColor: btnBgcolor, color: btnColor }}
+            style={{
+              backgroundColor: btnBgcolor,
+              color: btnColor
+            }}
             onClick={demoStart}
             label={btnLabel}
           />
+        )
+      default:
+        return (
+          <Fab
+            variant={variant}
+            size={btnSize}
+            style={{
+              backgroundColor: btnBgcolor,
+              color: btnColor
+            }}
+            onClick={demoStart}
+          >
+            {btnLabel}
+          </Fab>
         )
     }
   }
@@ -297,10 +318,8 @@ export default function Walkabout(props) {
         <Dialog
           style={{
             position: 'absolute',
-            left: demo && demo.x,
-            top: demo && demo.y + demo.height,
-            margin: 0,
-            padding: 0,
+            left: !isFixed && demo ? demo.x : '40vw',
+            top: !isFixed && demo ? demo.y + demo.height : '40vh',
             height: 'auto',
             maxHeight: 'fit-content',
             width: 'auto',
@@ -316,7 +335,7 @@ export default function Walkabout(props) {
           hideBackdrop
           id='demo'
         >
-          <animated.div style={{ ...textAnime }}>
+          <animated.div style={{ ...anime }}>
             <DialogTitle
               style={{
                 cursor: 'move',
@@ -330,10 +349,7 @@ export default function Walkabout(props) {
               <animated.div
                 style={{
                   padding: 0,
-                  color:
-                    titleStyle && titleStyle.color
-                      ? titleStyle.color
-                      : '#9c27b0',
+                  color: titleColor,
                   fontWeight: 'bold'
                 }}
               >

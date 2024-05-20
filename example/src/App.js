@@ -12,9 +12,8 @@ const App = () => {
     closingId: 'insights'}
   ]
   return (
-    <div style={{display:'flex', flexDirection:'column'}}>
-      <Walkabout links = {links} />
-      <div style={{display:'flex', flexDirection:'row'}}>
+    <div >
+      <Walkabout links = {links} animateType ={'blink'}/>
       <Button id='insights' >INSIGHTS </Button>
       <Button id='insightfilters'> Select </Button>
       <Button id='test'> Test </Button>
@@ -22,7 +21,6 @@ const App = () => {
       <Button >INSIGHTS </Button>
 
       <Button id='test1'> <AddIcon  />Test1 </Button>
-      </div>
       <Button >INSIGHTS </Button>
       <Button > Select </Button>
       <Button > Test </Button>
